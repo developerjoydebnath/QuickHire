@@ -1,10 +1,33 @@
+'use client';
+
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { ROUTES } from '@/constants/routes';
+import { fetcher } from '@/lib/fetcher';
+import { LocationModel } from '@/models';
 import { MapPin, Search } from 'lucide-react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import useSWR from 'swr';
 
 export function Hero() {
+  const router = useRouter();
+  const [search, setSearch] = useState('');
+  const [location, setLocation] = useState('all');
+
+  const { data } = useSWR('/locations?limit=100', fetcher, { revalidateOnFocus: false });
+  const locations: LocationModel[] = data?.data?.map((d: any) => new LocationModel(d)) || [];
+
+  const handleSearch = () => {
+    const params = new URLSearchParams();
+    if (search) params.set('search', search);
+    if (location && location !== 'all') params.set('location', location);
+
+    router.push(`${ROUTES.FIND_JOB}?${params.toString()}`);
+  };
+
   return (
     <section id="hero" className="relative h-[calc(100vh-80px)]">
       {/* pattern image  */}
@@ -55,27 +78,34 @@ export function Hero() {
                 <Input
                   type="text"
                   placeholder="Job title or keyword"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
                   className="placeholder:text-muted h-[50px] rounded-none border-0 border-b p-0 text-base! shadow-none outline-none focus-visible:ring-0"
                 />
               </div>
               <div className="flex h-full w-full items-center gap-4">
                 <MapPin className="h-6 min-h-6 w-6 min-w-6" />
-                <Select>
+                <Select value={location} onValueChange={setLocation}>
                   <SelectTrigger className="focus-visible:border-ring h-[50px]! w-full rounded-none border-0 border-b p-0 text-base! shadow-none ring-0 outline-none focus-visible:ring-0">
                     <SelectValue className="text-base!" placeholder="Select a location" />
                   </SelectTrigger>
                   <SelectContent position="popper" className="rounded-none">
-                    <SelectItem className="cursor-pointer rounded-none py-2 text-base" value="italy">
-                      FLorence, Italy
+                    <SelectItem className="cursor-pointer rounded-none py-2 text-base" value="all">
+                      All Locations
                     </SelectItem>
-                    <SelectItem className="cursor-pointer rounded-none py-2 text-base" value="italyd">
-                      FLorence, Italy
-                    </SelectItem>
+                    {locations.map((loc) => (
+                      <SelectItem key={loc.id} className="cursor-pointer rounded-none py-2 text-base" value={loc.id!}>
+                        {loc.state}, {loc.country}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
               </div>
 
-              <Button size="lg">Search my job</Button>
+              <Button size="lg" onClick={handleSearch}>
+                Search my job
+              </Button>
             </div>
             <div className="text-text flex flex-wrap items-center gap-2">
               <p className="">Popular : </p>

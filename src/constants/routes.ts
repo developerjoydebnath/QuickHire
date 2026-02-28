@@ -6,4 +6,5 @@ export const ROUTES = {
   SIGNUP: '/signup',
   DASHBOARD: '/dashboard',
   PROFILE: '/profile',
+  JOB_DETAILS: (id: string | number | null | undefined) => `/jobs/${id}`,
 };

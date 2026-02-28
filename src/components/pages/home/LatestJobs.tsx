@@ -1,94 +1,30 @@
+'use client';
+
 import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
+import { ROUTES } from '@/constants/routes';
+import { fetcher } from '@/lib/fetcher';
 import { ArrowRight } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
+import useSWR from 'swr';
 import LatestJobCard from './LatestJobCard';
 
-const jobs = [
-  {
-    company: 'Revolut',
-    location: 'Madrid, Spain',
-    title: 'Email Marketing',
-    type: 'Full Time',
-    description: 'Revolut is looking for Email Marketing to help team ma...',
-    tags: ['Marketing', 'Design'],
-    image: 'https://as2.ftcdn.net/v2/jpg/05/32/20/03/1000_F_532200355_odKN9Ou3WB6iHWJTFIElFtJbTuzJspY6.webp',
-    color: 'bg-rose-50 border-rose-100',
-  },
-  {
-    company: 'Dropbox',
-    location: 'San Fransisco, US',
-    title: 'Brand Designer',
-    type: 'Full Time',
-    description: 'Dropbox is looking for Brand Designer to help the team t...',
-    tags: ['Design', 'Business'],
-    image: 'https://as2.ftcdn.net/v2/jpg/05/32/20/03/1000_F_532200355_odKN9Ou3WB6iHWJTFIElFtJbTuzJspY6.webp',
-    color: 'bg-blue-50 border-blue-100',
-  },
-  {
-    company: 'Pitch',
-    location: 'Berlin, Germany',
-    title: 'Email Marketing',
-    type: 'Full Time',
-    description: 'Pitch is looking for Customer Manager to join marketing t...',
-    tags: ['Marketing', 'Tech'],
-    image: 'https://as2.ftcdn.net/v2/jpg/05/32/20/03/1000_F_532200355_odKN9Ou3WB6iHWJTFIElFtJbTuzJspY6.webp',
-    color: 'bg-indigo-50 border-indigo-100',
-  },
-  {
-    company: 'Blinkist',
-    location: 'Granada, Spain',
-    title: 'Visual Designer',
-    type: 'Full Time',
-    description: 'Blinkist is looking for Visual Designer to help team desi...',
-    tags: ['Marketing', 'Design'],
-    image: 'https://as2.ftcdn.net/v2/jpg/05/32/20/03/1000_F_532200355_odKN9Ou3WB6iHWJTFIElFtJbTuzJspY6.webp',
-    color: 'bg-teal-50 border-teal-100',
-  },
-  {
-    company: 'ClassPass',
-    location: 'Manchester, UK',
-    title: 'Product Designer',
-    type: 'Full Time',
-    description: 'ClassPass is looking for Product Designer to help us...',
-    tags: ['Marketing', 'Design'],
-    image: 'https://as2.ftcdn.net/v2/jpg/05/32/20/03/1000_F_532200355_odKN9Ou3WB6iHWJTFIElFtJbTuzJspY6.webp',
-    color: 'bg-purple-50 border-purple-100',
-  },
-  {
-    company: 'Canva',
-    location: 'Ontario, Canada',
-    title: 'Lead Designer',
-    type: 'Full Time',
-    description: 'Canva is looking for Lead Engineer to help develop n...',
-    tags: ['Design', 'Business'],
-    image: 'https://as2.ftcdn.net/v2/jpg/05/32/20/03/1000_F_532200355_odKN9Ou3WB6iHWJTFIElFtJbTuzJspY6.webp',
-    color: 'bg-cyan-50 border-cyan-100',
-  },
-  {
-    company: 'GoDaddy',
-    location: 'Marseille, France',
-    title: 'Brand Strategist',
-    type: 'Full Time',
-    description: 'GoDaddy is looking for Brand Strategist to join the team...',
-    tags: ['Marketing', 'Tech'],
-    image: 'https://as2.ftcdn.net/v2/jpg/05/32/20/03/1000_F_532200355_odKN9Ou3WB6iHWJTFIElFtJbTuzJspY6.webp',
-    color: 'bg-green-50 border-green-100',
-  },
-  {
-    company: 'Twitter',
-    location: 'San Diego, US',
-    title: 'Data Analyst',
-    type: 'Full Time',
-    description: 'Twitter is looking for Data Analyst to help team desi...',
-    tags: ['Marketing', 'Technology'],
-    image: 'https://as2.ftcdn.net/v2/jpg/05/32/20/03/1000_F_532200355_odKN9Ou3WB6iHWJTFIElFtJbTuzJspY6.webp',
-    color: 'bg-sky-50 border-sky-100',
-  },
-];
-
 export function LatestJobs() {
+  const { data, isLoading } = useSWR('/jobs?limit=10', fetcher, { revalidateOnFocus: false });
+  const latestJobs = data?.data || [];
+
   return (
     <section className="relative py-20">
+      {/* pattern image  */}
+      <Image
+        src="/images/Pattern.png"
+        alt="Man"
+        height={794}
+        width={860}
+        className="absolute right-0 bottom-0 -z-10 aspect-auto h-[1/2] w-fit object-cover lg:h-full"
+      />
+
       {/* Top-left corner cut */}
       <div className="absolute top-0 left-0 z-30 h-64 w-[320px] overflow-hidden bg-transparent">
         <div className="relative h-full w-full">
@@ -103,21 +39,69 @@ export function LatestJobs() {
           </h2>
           <Button
             variant="ghost"
-            className="text-primary hover:text-primary w-fit gap-4 text-base font-semibold"
+            className="text-primary hover:text-primary hidden w-fit gap-4 text-base font-semibold md:flex"
             asChild
           >
-            <Link prefetch={false} href="#">
+            <Link prefetch={false} href={ROUTES.FIND_JOB}>
               Show all jobs
               <ArrowRight className="size-6" />
             </Link>
           </Button>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-          {jobs.map((job, idx) => (
-            <LatestJobCard key={idx} job={job} />
-          ))}
-        </div>
+        {isLoading ? (
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div
+                key={i}
+                className="flex flex-col items-start gap-6 bg-white px-4 py-4 sm:px-6 sm:py-6 md:px-10 lg:flex-row"
+              >
+                <Skeleton className="h-16 w-16 shrink-0 rounded-md" />
+                <div className="w-full space-y-4">
+                  <div className="space-y-2">
+                    <Skeleton className="h-6 w-3/4" />
+                    <Skeleton className="h-4 w-1/2" />
+                  </div>
+                  <div className="flex gap-2">
+                    <Skeleton className="h-6 w-20 rounded-full" />
+                    <Skeleton className="h-6 w-16 rounded-full" />
+                    <Skeleton className="h-6 w-16 rounded-full" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : latestJobs.length === 0 ? (
+          <p className="py-12 text-center text-slate-500">No jobs found at the moment.</p>
+        ) : (
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            {latestJobs.map((job: any) => {
+              // Map backend job to card format
+              const cardData = {
+                id: job._id,
+                company: job.company?.name || 'Unknown',
+                location: job.location ? `${job.location.state}, ${job.location.country}` : 'Remote',
+                title: job.title,
+                type: job.job_type?.name || 'Full Time',
+                description: job.description.replace(/<[^>]+>/g, '').substring(0, 80) + '...', // Strip HTML for short desc
+                tags: job.categories?.map((c: any) => c.name).slice(0, 2) || [],
+                image: job.image_url || job.company?.image_url || '/images/company-placeholder.png', // Priority: job image -> company image -> fallback
+              };
+              return <LatestJobCard key={job._id} job={cardData as any} />;
+            })}
+          </div>
+        )}
+
+        <Button
+          variant="ghost"
+          className="text-primary hover:text-primary mt-8 flex w-fit gap-4 text-base font-semibold md:hidden"
+          asChild
+        >
+          <Link prefetch={false} href={ROUTES.FIND_JOB}>
+            Show all jobs
+            <ArrowRight className="size-6" />
+          </Link>
+        </Button>
       </div>
     </section>
   );

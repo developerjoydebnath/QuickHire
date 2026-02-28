@@ -50,6 +50,7 @@ export class Job {
   id: string | null;
   title: string;
   description: string;
+  image_url: string;
   categories: JobCategory[];
   location: LocationModel | null;
   company: Company | null;
@@ -61,6 +62,7 @@ export class Job {
     this.id = data._id ?? null;
     this.title = data.title ?? '';
     this.description = data.description ?? '';
+    this.image_url = data.image_url ?? '';
     this.categories = data.categories ? data.categories.map((c: any) => new JobCategory(c)) : [];
     this.location = data.location ? new LocationModel(data.location) : null;
     this.company = data.company ? new Company(data.company) : null;

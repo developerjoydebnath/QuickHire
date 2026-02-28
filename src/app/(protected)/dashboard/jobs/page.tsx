@@ -55,6 +55,7 @@ export default function JobsPage() {
     defaultValues: {
       title: '',
       description: '',
+      image_url: '',
       categories: [],
       location: '',
       company: '',
@@ -79,6 +80,7 @@ export default function JobsPage() {
   const formFields = useMemo(
     () => [
       { name: 'title', label: 'Title', type: 'text', placeholder: 'Job title', required: true },
+      { name: 'image_url', label: 'Image URL', type: 'text', placeholder: 'https://...', required: false },
       {
         name: 'description',
         label: 'Description',
@@ -122,6 +124,7 @@ export default function JobsPage() {
     reset({
       title: '',
       description: '',
+      image_url: '',
       categories: [],
       location: '',
       company: '',
@@ -138,6 +141,7 @@ export default function JobsPage() {
     reset({
       title: item.title,
       description: item.description,
+      image_url: item.image_url ?? '',
       categories: item.categories.map((c) => c.id!),
       location: item.location?.id || '',
       company: item.company?.id || '',
