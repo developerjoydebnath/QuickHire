@@ -20,8 +20,8 @@ This is the user-facing web application for QuickHire, built to help users brows
 1. **Install Dependencies**
 
    ```bash
-   npm install --legacy-peer-deps
-   # or npm install if no conflicts
+   npm install
+   # or npm install --legacy-peer-deps if there are any conflicts
    ```
 
 2. **Environment Variables**
