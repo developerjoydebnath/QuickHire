@@ -1,11 +1,11 @@
 'use client';
 
+import MenuIcon from '@/components/icons/MenuIcon';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
 import { ROUTES } from '@/constants/routes';
 import Image from 'next/image';
 import Link from 'next/link';
-import MenuIcon from '../icons/MenuIcon';
-import { Button } from '../ui/button';
-import { Separator } from '../ui/separator';
 
 export default function Header() {
   return (

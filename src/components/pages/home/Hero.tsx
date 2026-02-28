@@ -1,8 +1,8 @@
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { MapPin, Search } from 'lucide-react';
 import Image from 'next/image';
-import { Button } from '../ui/button';
-import { Input } from '../ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 
 export function Hero() {
   return (
@@ -77,7 +77,7 @@ export function Hero() {
 
               <Button size="lg">Search my job</Button>
             </div>
-            <div className="flex flex-wrap items-center gap-2">
+            <div className="text-text flex flex-wrap items-center gap-2">
               <p className="">Popular : </p>
               <p className="">UI Designer, UX Researcher, Android, Admin</p>
             </div>
