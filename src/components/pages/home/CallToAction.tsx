@@ -1,27 +1,55 @@
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
+import { ROUTES } from '@/constants/routes';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export function CallToAction() {
   return (
-    <section className="py-20 bg-primary">
-      <div className="container mx-auto px-6 max-w-5xl">
-        <div className="bg-primary-foreground/10 rounded-3xl p-10 md:p-16 flex flex-col md:flex-row items-center justify-between gap-10">
-          <div className="flex-1 space-y-6 text-center md:text-left text-white">
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
-              Start posting jobs today
+    <section className="bg-white py-10 sm:py-20 lg:py-24">
+      <div className="container mx-auto">
+        <div className="bg-primary relative flex flex-col overflow-hidden xl:flex-row">
+          {/* Top-left corner cut */}
+          <div className="absolute top-0 left-0 z-30 h-64 w-[320px] overflow-hidden bg-transparent">
+            <div className="relative h-full w-full">
+              <div className="absolute -top-64 -left-72 z-10 h-80 w-[500px] rotate-155 bg-white sm:-top-56 sm:-left-64" />
+            </div>
+          </div>
+
+          {/* Bottom-right corner cut */}
+          <div className="absolute right-0 bottom-0 z-30 h-80 w-[420px] overflow-hidden bg-transparent">
+            <div className="relative h-full w-full">
+              <div className="absolute top-64 -right-72 z-10 h-80 w-[500px] rotate-155 bg-white sm:top-56 sm:-right-64" />
+            </div>
+          </div>
+
+          <div className="relative z-20 flex w-full flex-col items-center justify-center border py-16 text-white sm:px-16 lg:pl-28 xl:w-[50%] xl:items-start xl:py-24">
+            {/* texts  */}
+            <h2 className="font-clash-display mb-4 text-center text-4xl text-[32px] leading-[1.1] font-semibold md:text-5xl xl:text-left">
+              Start posting <br className="hidden xl:block" /> jobs <br className="xl:hidden" /> today
             </h2>
-            <p className="text-lg text-primary-foreground/80 font-medium">
+            <p className="mb-4 text-base font-medium text-white/90 sm:text-xl md:mb-8">
               Start posting jobs for only $10.
             </p>
-          </div>
-          
-          <div className="shrink-0 w-full md:w-auto">
-             <Button
+            <div>
+              <Button
                 size="lg"
                 variant="secondary"
-                className="w-full md:w-auto px-10 py-7 text-lg font-bold text-primary hover:bg-white hover:scale-105 transition-all shadow-xl"
-             >
-                Sign Up For Free
-             </Button>
+                className="text-primary bg-white px-8 text-lg font-bold hover:bg-white/90"
+                asChild
+              >
+                <Link href={ROUTES.SIGN_UP}>Sign Up For Free</Link>
+              </Button>
+            </div>
+          </div>
+
+          <div className="xl:pb0 right-20 bottom-0 z-30 flex justify-end border pb-24 pl-4 xl:absolute xl:pl-0">
+            <Image
+              src="/images/dashboard.png"
+              alt="Dashboard"
+              height={500}
+              width={800}
+              className="h-fit object-cover xl:max-w-[530px]"
+            />
           </div>
         </div>
       </div>
