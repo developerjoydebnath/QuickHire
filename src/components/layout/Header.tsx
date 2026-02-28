@@ -3,16 +3,25 @@
 import MenuIcon from '@/components/icons/MenuIcon';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { ROUTES } from '@/constants/routes';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
+
+const NAV_LINKS = [
+  { label: 'Find Jobs', href: ROUTES.FIND_JOB },
+  { label: 'Browse Companies', href: ROUTES.BROWSE_COMPANIES },
+];
 
 export default function Header() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <header className="bg-background sticky top-0 z-50">
+    <header className="bg-background sticky top-0 z-50 shadow-xs">
       <div className="container flex h-[78px] items-center justify-between gap-8">
         <div className="flex items-center gap-12">
-          <div className="flex items-center gap-2">
+          <Link href={ROUTES.HOME} className="flex items-center gap-2">
             <Image
               src="/images/Logo.png"
               alt="QuickHire"
@@ -21,13 +30,10 @@ export default function Header() {
               className="h-9 w-[152px] min-w-[152px]"
             />
             <h3 className="sr-only text-xl font-bold">QuichHire</h3>
-          </div>
+          </Link>
 
           <nav className="hidden items-center gap-4 lg:flex">
-            {[
-              { label: 'Find Jobs', href: ROUTES.FIND_JOB },
-              { label: 'Browse Companies', href: ROUTES.BROWSE_COMPANIES },
-            ].map((item) => (
+            {NAV_LINKS.map((item) => (
               <Link
                 prefetch={false}
                 key={item.href}
@@ -41,15 +47,60 @@ export default function Header() {
         </div>
         <div className="hidden items-center gap-4 lg:flex">
           <Button size="lg" variant="outline">
-            Get Started
+            Login
           </Button>
           <Separator orientation="vertical" className="h-[50px]!" />
-          <Button size="lg">Login</Button>
+          <Button size="lg">Sign Up</Button>
         </div>
 
-        <Button className="rounded-full lg:hidden [&_svg:not([class*='size-'])]:size-5" size="icon" variant="outline">
-          <MenuIcon />
-        </Button>
+        {/* Mobile Navigation */}
+        <div className="lg:hidden">
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
+            <SheetTrigger asChild>
+              <Button className="rounded-full [&_svg:not([class*='size-'])]:size-5" size="icon" variant="outline">
+                <MenuIcon />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="top" className="p-4">
+              <SheetHeader className="mb-8 pl-0">
+                <SheetTitle className="w-fit text-left">
+                  <Link href={ROUTES.HOME} className="flex items-center gap-2" onClick={() => setIsOpen(false)}>
+                    <Image
+                      src="/images/Logo.png"
+                      alt="QuickHire"
+                      width={200}
+                      height={100}
+                      className="h-9 w-[152px] min-w-[152px]"
+                    />
+                    <h3 className="sr-only text-xl font-bold">QuichHire</h3>
+                  </Link>
+                </SheetTitle>
+              </SheetHeader>
+              <nav className="flex flex-col gap-6">
+                {NAV_LINKS.map((item) => (
+                  <Link
+                    prefetch={false}
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setIsOpen(false)}
+                    className="text-text hover:text-primary font-epilogue text-lg font-medium transition-colors duration-200 ease-in-out"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+                <Separator className="my-2" />
+                <div className="flex flex-col gap-4">
+                  <Button size="lg" variant="outline" className="w-full" onClick={() => setIsOpen(false)}>
+                    Login
+                  </Button>
+                  <Button size="lg" className="w-full" onClick={() => setIsOpen(false)}>
+                    Sign Up
+                  </Button>
+                </div>
+              </nav>
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
     </header>
   );

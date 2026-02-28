@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
+import FeatureJobCard from './FeatureJobCard';
 
 const jobs = [
   {
@@ -88,15 +88,15 @@ const jobs = [
 
 export function FeaturedJobs() {
   return (
-    <section className="bg-slate-50 py-12 md:py-16 lg:py-20">
+    <section className="bg-white py-12 md:py-16 lg:py-20">
       <div className="container mx-auto px-6">
         <div className="mb-6 flex flex-col justify-between gap-4 sm:flex-row sm:items-end md:mb-12">
-          <h2 className="text-text font-clash-display text-4xl font-semibold md:text-5xl">
+          <h2 className="text-text font-clash-display text-[32px] font-semibold md:text-5xl">
             Featured <span className="text-primary">jobs</span>
           </h2>
           <Button
             variant="ghost"
-            className="text-primary hover:text-primary w-fit gap-4 text-base font-semibold"
+            className="text-primary hover:text-primary hidden w-fit gap-4 text-base font-semibold md:flex"
             asChild
           >
             <Link href="#">
@@ -108,41 +108,20 @@ export function FeaturedJobs() {
 
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {jobs.map((job, idx) => (
-            <div
-              key={idx}
-              className="group hover:border-primary-light flex cursor-pointer flex-col space-y-4 border bg-white p-6 transition-all duration-300 hover:shadow-md"
-            >
-              <div className="flex items-start justify-between">
-                <div>
-                  <Image src={job.image} alt={job.title} className="h-12 w-12 object-cover" width={100} height={100} />
-                </div>
-                <span className="leading[160%] border-primary text-primary border px-3 py-1 text-base">{job.type}</span>
-              </div>
-
-              <div className="space-y-2">
-                <h3 className="group-hover:text-primary text-text text-lg leading-[160%] font-semibold transition-colors">
-                  {job.title}
-                </h3>
-
-                <div className="leading[160%] text-muted-foreground flex items-center gap-2 text-base">
-                  <span>{job.company}</span>
-                  <span className="h-1 w-1 rounded-full bg-slate-300" />
-                  <span>{job.location}</span>
-                </div>
-              </div>
-
-              <p className="leading[160%] text-muted line-clamp-2 flex-1 text-base">{job.description}</p>
-
-              <div className="mt-auto flex flex-wrap gap-2">
-                {job.tags.map((tag) => (
-                  <span key={tag} className="rounded-full bg-slate-100 px-4 py-1 text-sm font-semibold text-slate-600">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
+            <FeatureJobCard key={idx} job={job} />
           ))}
         </div>
+
+        <Button
+          variant="ghost"
+          className="text-primary hover:text-primary mt-8 flex w-fit gap-4 text-base font-semibold md:hidden"
+          asChild
+        >
+          <Link href="#">
+            Show all jobs
+            <ArrowRight className="size-6" />
+          </Link>
+        </Button>
       </div>
     </section>
   );

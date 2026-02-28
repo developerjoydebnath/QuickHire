@@ -1,3 +1,4 @@
+import { Footer } from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
 import type { Metadata } from 'next';
 
@@ -15,6 +16,7 @@ export default function RootLayout({
     <main className="flex-1">
       <Header />
       {children}
+      <Footer />
     </main>
   );
 }
