@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export function CallToAction() {
   return (
-    <section className="bg-white py-10 sm:py-20 lg:py-24">
+    <section className="bg-white pt-10 pb-0 sm:pt-20 sm:pb-0 lg:pt-24 lg:pb-24">
       <div className="container mx-auto">
         <div className="bg-primary relative flex flex-col overflow-hidden xl:flex-row">
           {/* Top-left corner cut */}
@@ -22,7 +22,7 @@ export function CallToAction() {
             </div>
           </div>
 
-          <div className="relative z-20 flex w-full flex-col items-center justify-center border py-16 text-white sm:px-16 lg:pl-28 xl:w-[50%] xl:items-start xl:py-24">
+          <div className="relative z-20 flex w-full flex-col items-center justify-center pt-16 pb-4 text-white sm:px-16 lg:pl-28 xl:w-[50%] xl:items-start xl:pt-24 xl:pb-24">
             {/* texts  */}
             <h2 className="font-clash-display mb-4 text-center text-4xl text-[32px] leading-[1.1] font-semibold md:text-5xl xl:text-left">
               Start posting <br className="hidden xl:block" /> jobs <br className="xl:hidden" /> today
@@ -30,11 +30,11 @@ export function CallToAction() {
             <p className="mb-4 text-base font-medium text-white/90 sm:text-xl md:mb-8">
               Start posting jobs for only $10.
             </p>
-            <div>
+            <div className="flex w-full justify-center px-4 xl:justify-start">
               <Button
                 size="lg"
                 variant="secondary"
-                className="text-primary bg-white px-8 text-lg font-bold hover:bg-white/90"
+                className="text-primary w-full flex-1 bg-white px-8 text-lg font-bold hover:bg-white/90 sm:w-auto sm:flex-none"
                 asChild
               >
                 <Link href={ROUTES.SIGN_UP}>Sign Up For Free</Link>
@@ -42,7 +42,7 @@ export function CallToAction() {
             </div>
           </div>
 
-          <div className="xl:pb0 right-20 bottom-0 z-30 flex justify-end border pb-24 pl-4 xl:absolute xl:pl-0">
+          <div className="right-20 bottom-0 z-30 flex justify-end pb-24 pl-4 xl:absolute xl:pb-0 xl:pl-0">
             <Image
               src="/images/dashboard.png"
               alt="Dashboard"

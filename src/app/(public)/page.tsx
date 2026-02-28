@@ -11,9 +11,9 @@ export default function Home() {
       <Hero />
       <Companies />
       <Categories />
+      <CallToAction />
       <FeaturedJobs />
       <LatestJobs />
-      <CallToAction />
     </>
   );
 }

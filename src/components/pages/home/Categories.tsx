@@ -16,7 +16,7 @@ const categories = [
 
 export function Categories() {
   return (
-    <section className="bg-white py-20">
+    <section className="bg-white py-10 sm:py-12 md:py-14 lg:py-[72px]">
       <div className="container mx-auto px-6">
         <div className="mb-12 flex flex-col items-end justify-between gap-4 md:flex-row">
           <h2 className="text-4xl font-bold tracking-tight text-slate-900 md:text-5xl">
