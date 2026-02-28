@@ -106,7 +106,7 @@ export function LatestJobs() {
             className="text-primary hover:text-primary w-fit gap-4 text-base font-semibold"
             asChild
           >
-            <Link href="#">
+            <Link prefetch={false} href="#">
               Show all jobs
               <ArrowRight className="size-6" />
             </Link>

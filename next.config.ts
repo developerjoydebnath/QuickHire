@@ -14,6 +14,14 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'as2.ftcdn.net',
       },
+      {
+        protocol: 'https',
+        hostname: 'raw.githubusercontent.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
     ],
   },
 };

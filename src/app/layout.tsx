@@ -1,4 +1,6 @@
+import { Toaster } from '@/components/ui/sonner';
 import { TooltipProvider } from '@/components/ui/tooltip';
+import AuthProvider from '@/providers/AuthProvider';
 import type { Metadata } from 'next';
 import { Epilogue } from 'next/font/google';
 import localFont from 'next/font/local';
@@ -54,9 +56,12 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full antialiased">
       <body className={`${epilogue.variable} ${clashDisplay.variable} flex min-h-full flex-col antialiased`}>
-        <TooltipProvider>
-          <main className="flex-1">{children}</main>
-        </TooltipProvider>
+        <AuthProvider>
+          <TooltipProvider>
+            <main className="flex-1">{children}</main>
+          </TooltipProvider>
+        </AuthProvider>
+        <Toaster position="top-center" richColors />
       </body>
     </html>
   );

@@ -99,7 +99,7 @@ export function FeaturedJobs() {
             className="text-primary hover:text-primary hidden w-fit gap-4 text-base font-semibold md:flex"
             asChild
           >
-            <Link href="#">
+            <Link prefetch={false} href="#">
               Show all jobs
               <ArrowRight className="size-6" />
             </Link>
@@ -117,7 +117,7 @@ export function FeaturedJobs() {
           className="text-primary hover:text-primary mt-8 flex w-fit gap-4 text-base font-semibold md:hidden"
           asChild
         >
-          <Link href="#">
+          <Link prefetch={false} href="#">
             Show all jobs
             <ArrowRight className="size-6" />
           </Link>

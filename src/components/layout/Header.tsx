@@ -5,8 +5,10 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { ROUTES } from '@/constants/routes';
+import { useAuthStore } from '@/store/authStore';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 const NAV_LINKS = [
@@ -16,12 +18,19 @@ const NAV_LINKS = [
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
+  const { user, isAuthenticated, isLoading, logout } = useAuthStore();
+
+  const handleLogout = async () => {
+    await logout();
+    router.push('/');
+  };
 
   return (
     <header className="bg-background sticky top-0 z-50 shadow-xs">
       <div className="container flex h-[78px] items-center justify-between gap-8">
         <div className="flex items-center gap-12">
-          <Link href={ROUTES.HOME} className="flex items-center gap-2">
+          <Link prefetch={false} href={ROUTES.HOME} className="flex items-center gap-2">
             <Image
               src="/images/Logo.png"
               alt="QuickHire"
@@ -46,11 +55,28 @@ export default function Header() {
           </nav>
         </div>
         <div className="hidden items-center gap-4 lg:flex">
-          <Button size="lg" variant="outline">
-            Login
-          </Button>
-          <Separator orientation="vertical" className="h-[50px]!" />
-          <Button size="lg">Sign Up</Button>
+          {isLoading ? null : isAuthenticated && user ? (
+            <>
+              <span className="text-sm font-medium">Hi, {user.name}</span>
+              <Button size="lg" variant="outline" onClick={handleLogout}>
+                Logout
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button size="lg" variant="outline" asChild>
+                <Link prefetch={false} href={ROUTES.LOGIN}>
+                  Login
+                </Link>
+              </Button>
+              <Separator orientation="vertical" className="h-[50px]!" />
+              <Button size="lg" asChild>
+                <Link prefetch={false} href={ROUTES.SIGNUP}>
+                  Sign Up
+                </Link>
+              </Button>
+            </>
+          )}
         </div>
 
         {/* Mobile Navigation */}
@@ -64,7 +90,7 @@ export default function Header() {
             <SheetContent side="top" className="p-4">
               <SheetHeader className="mb-8 pl-0">
                 <SheetTitle className="w-fit text-left">
-                  <Link href={ROUTES.HOME} className="flex items-center gap-2" onClick={() => setIsOpen(false)}>
+                  <Link prefetch={false} href={ROUTES.HOME} className="flex items-center gap-2" onClick={() => setIsOpen(false)}>
                     <Image
                       src="/images/Logo.png"
                       alt="QuickHire"
@@ -90,12 +116,35 @@ export default function Header() {
                 ))}
                 <Separator className="my-2" />
                 <div className="flex flex-col gap-4">
-                  <Button size="lg" variant="outline" className="w-full" onClick={() => setIsOpen(false)}>
-                    Login
-                  </Button>
-                  <Button size="lg" className="w-full" onClick={() => setIsOpen(false)}>
-                    Sign Up
-                  </Button>
+                  {isLoading ? null : isAuthenticated && user ? (
+                    <>
+                      <span className="text-sm font-medium">Hi, {user.name}</span>
+                      <Button
+                        size="lg"
+                        variant="outline"
+                        className="w-full"
+                        onClick={() => {
+                          handleLogout();
+                          setIsOpen(false);
+                        }}
+                      >
+                        Logout
+                      </Button>
+                    </>
+                  ) : (
+                    <>
+                      <Button size="lg" variant="outline" className="w-full" asChild>
+                        <Link prefetch={false} href={ROUTES.LOGIN}>
+                          Login
+                        </Link>
+                      </Button>
+                      <Button size="lg" className="w-full" asChild>
+                        <Link prefetch={false} href={ROUTES.SIGNUP}>
+                          Sign Up
+                        </Link>
+                      </Button>
+                    </>
+                  )}
                 </div>
               </nav>
             </SheetContent>

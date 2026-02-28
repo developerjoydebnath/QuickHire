@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export default function Companies() {
   return (
-    <section className="bg-white py-10 sm:py-12">
+    <section id="companies" className="bg-white py-10 sm:py-12">
       <div className="container mx-auto space-y-8">
         <p className="text-muted text-lg">Companies we helped grow</p>
         <div className="flex flex-wrap items-center justify-between gap-8 md:gap-16">

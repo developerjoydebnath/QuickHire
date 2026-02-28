@@ -35,7 +35,7 @@ export function Footer() {
         <div className="grid grid-cols-4 gap-12 lg:grid-cols-12 lg:gap-8">
           {/* Logo and Description */}
           <div className="col-span-4 space-y-6 lg:pr-8">
-            <Link href={ROUTES.HOME} className="flex items-center gap-2">
+            <Link prefetch={false} href={ROUTES.HOME} className="flex items-center gap-2">
               <Image
                 src="/images/Logo2.png"
                 alt="QuickHire"
@@ -56,7 +56,7 @@ export function Footer() {
             <ul className="space-y-4 text-base text-slate-400">
               {ABOUT_LINKS.map((link) => (
                 <li key={link.label}>
-                  <Link href={link.href} className="transition-colors hover:text-white">
+                  <Link prefetch={false} href={link.href} className="transition-colors hover:text-white">
                     {link.label}
                   </Link>
                 </li>
@@ -70,7 +70,7 @@ export function Footer() {
             <ul className="space-y-4 text-base text-slate-400">
               {RESOURCES_LINKS.map((link) => (
                 <li key={link.label}>
-                  <Link href={link.href} className="transition-colors hover:text-white">
+                  <Link prefetch={false} href={link.href} className="transition-colors hover:text-white">
                     {link.label}
                   </Link>
                 </li>

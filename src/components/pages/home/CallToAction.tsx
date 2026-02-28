@@ -37,7 +37,7 @@ export function CallToAction() {
                 className="text-primary w-full flex-1 bg-white px-8 text-lg font-bold hover:bg-white/90 sm:w-auto sm:flex-none"
                 asChild
               >
-                <Link href={ROUTES.SIGN_UP}>Sign Up For Free</Link>
+                <Link prefetch={false} href={ROUTES.SIGNUP}>Sign Up For Free</Link>
               </Button>
             </div>
           </div>
