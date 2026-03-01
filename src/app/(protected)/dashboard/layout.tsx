@@ -1,6 +1,6 @@
 'use client';
 
-import { DashboardSidebar } from '@/components/dashboard/Sidebar';
+import { DashboardSidebar } from '@/components/layout/Sidebar';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { useAuthStore } from '@/store/authStore';

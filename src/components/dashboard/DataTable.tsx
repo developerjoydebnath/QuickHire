@@ -36,6 +36,7 @@ interface DataTableProps<T> {
   onDelete: (item: T) => void;
   onCreate: () => void;
   getId: (item: T) => string;
+  hideCreate?: boolean;
 }
 
 export default function DataTable<T>({
@@ -51,16 +52,19 @@ export default function DataTable<T>({
   onDelete,
   onCreate,
   getId,
+  hideCreate = false,
 }: DataTableProps<T>) {
   return (
     <div className="space-y-4">
       {/* Header */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <h2 className="text-2xl font-bold">{title}</h2>
-        <Button onClick={onCreate} className="gap-2">
-          <Plus size={16} />
-          Add New
-        </Button>
+        {!hideCreate && (
+          <Button onClick={onCreate} className="gap-2">
+            <Plus size={16} />
+            Add New
+          </Button>
+        )}
       </div>
 
       {/* Search */}
@@ -78,7 +82,7 @@ export default function DataTable<T>({
       <div className="rounded-md border">
         <Table>
           <TableHeader>
-            <TableRow>
+            <TableRow className="bg-gray-200 hover:bg-gray-200">
               {columns.map((col) => (
                 <TableHead key={col.key}>{col.label}</TableHead>
               ))}
@@ -88,7 +92,7 @@ export default function DataTable<T>({
           <TableBody>
             {isLoading ? (
               Array.from({ length: 5 }).map((_, i) => (
-                <TableRow key={i}>
+                <TableRow key={i} className="hover:bg-gray-100">
                   {columns.map((col) => (
                     <TableCell key={col.key}>
                       <Skeleton className="h-5 w-24" />
@@ -100,14 +104,14 @@ export default function DataTable<T>({
                 </TableRow>
               ))
             ) : data.length === 0 ? (
-              <TableRow>
+              <TableRow className="hover:bg-gray-100">
                 <TableCell colSpan={columns.length + 1} className="text-muted-foreground py-8 text-center">
                   No data found.
                 </TableCell>
               </TableRow>
             ) : (
               data.map((item) => (
-                <TableRow key={getId(item)}>
+                <TableRow key={getId(item)} className="hover:bg-gray-100">
                   {columns.map((col) => (
                     <TableCell key={col.key}>{col.render ? col.render(item) : (item as any)[col.key]}</TableCell>
                   ))}

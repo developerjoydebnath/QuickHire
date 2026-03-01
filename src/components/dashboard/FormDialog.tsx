@@ -20,7 +20,7 @@ export default function FormDialog({ open, onClose, title, isSubmitting, onSubmi
           <DialogTitle>{title}</DialogTitle>
         </DialogHeader>
         <form onSubmit={onSubmit} className="space-y-4">
-          <div className="max-h-[60vh] space-y-4 overflow-y-auto pr-1">{children}</div>
+          <div className="max-h-[60vh] space-y-4 overflow-y-auto p-2">{children}</div>
           <DialogFooter>
             <Button variant="outline" type="button" onClick={onClose}>
               Cancel

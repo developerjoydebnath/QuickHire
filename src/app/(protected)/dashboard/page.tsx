@@ -31,11 +31,11 @@ export default function DashboardPage() {
           const Icon = stat.icon;
           const colorClasses = stat.color.split(' ');
           return (
-            <Card key={stat.key}>
+            <Card key={stat.key} className="rounded-md shadow-none">
               <CardHeader className="flex flex-row items-center justify-between pb-2">
                 <CardTitle className="text-muted-foreground text-sm font-medium">{stat.label}</CardTitle>
-                <div className={`flex size-10 items-center justify-center rounded-lg ${colorClasses[1]}`}>
-                  <Icon size={20} className={colorClasses[0]} />
+                <div className={`flex size-10 items-center justify-center rounded-lg bg-gray-100`}>
+                  <Icon size={20} className="text-gray-500" />
                 </div>
               </CardHeader>
               <CardContent>
@@ -51,7 +51,7 @@ export default function DashboardPage() {
       </div>
 
       {/* Application Status Breakdown */}
-      <Card>
+      <Card className="rounded-md shadow-none">
         <CardHeader>
           <CardTitle>Applications by Status</CardTitle>
         </CardHeader>
@@ -65,7 +65,7 @@ export default function DashboardPage() {
           ) : (
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
               {(data?.applicationsByStatus || []).map((s: any) => (
-                <div key={s._id} className="rounded-lg border p-4 text-center">
+                <div key={s._id} className="rounded-md border p-4 text-center">
                   <p className="text-muted-foreground mb-1 text-xs font-medium capitalize">{s._id}</p>
                   <p className="text-2xl font-bold">{s.count}</p>
                 </div>

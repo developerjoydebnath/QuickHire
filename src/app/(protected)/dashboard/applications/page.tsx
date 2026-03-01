@@ -119,7 +119,7 @@ export default function ApplicationsPage() {
           <SelectTrigger className="w-40">
             <SelectValue placeholder="All" />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent position="popper">
             <SelectItem value="all">All</SelectItem>
             {STATUS_OPTIONS.map((s) => (
               <SelectItem key={s} value={s} className="capitalize">
@@ -143,6 +143,7 @@ export default function ApplicationsPage() {
         onDelete={handleDelete}
         onCreate={openCreate}
         getId={(item) => item.id!}
+        hideCreate
       />
 
       <FormDialog
