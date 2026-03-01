@@ -33,7 +33,7 @@ export const useAuthStore = create<AuthState>((set) => ({
   fetchUser: async () => {
     try {
       set({ isLoading: true });
-      const res = await axios.get(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/me`);
+      const res = await axios.get('/api/me');
       set({
         user: res.data,
         isAuthenticated: true,

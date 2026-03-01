@@ -17,11 +17,11 @@ export async function POST(req: Request) {
   }
 
   cookieStore.set('jwt', data.token, {
-    httpOnly: true,
+    httpOnly: false,
     secure: true,
     sameSite: 'lax',
     path: '/',
   });
 
-  return new Response(JSON.stringify({ success: true }));
+  return new Response(JSON.stringify(data));
 }
