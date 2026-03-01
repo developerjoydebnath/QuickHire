@@ -43,3 +43,8 @@ This is the user-facing web application for QuickHire, built to help users brows
 - `npm run build` - Builds the application for production deployment.
 - `npm run start` - Runs the production server after building.
 - `npm run lint` - Runs ESLint to find code issues.
+
+## Demo Credentials
+
+- **Admin Email**: `admin@example.com`
+- **Password**: `password`

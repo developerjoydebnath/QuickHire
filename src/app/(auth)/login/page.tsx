@@ -19,6 +19,7 @@ export default function LoginPage() {
   const {
     control,
     handleSubmit,
+    setValue,
     formState: { isSubmitting },
   } = useForm<LoginDto>({
     resolver: zodResolver(loginSchema),
@@ -69,6 +70,18 @@ export default function LoginPage() {
 
           <Button className="w-full" type="submit" disabled={isSubmitting}>
             {isSubmitting ? 'Signing in...' : 'Sign in'}
+          </Button>
+
+          <Button
+            type="button"
+            variant="outline"
+            className="mt-4 w-full"
+            onClick={() => {
+              setValue('email', 'admin@example.com');
+              setValue('password', 'password');
+            }}
+          >
+            Auto-fill Admin Credentials
           </Button>
         </form>
       </div>
