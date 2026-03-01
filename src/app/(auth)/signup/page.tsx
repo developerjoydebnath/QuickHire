@@ -3,9 +3,11 @@
 import InputField from '@/components/form/InputField';
 import { Button } from '@/components/ui/button';
 import { registerFormFields } from '@/constants/authFormFIelds';
+import { ROUTES } from '@/constants/routes';
 import { axiosInstance } from '@/lib/axios';
 import { RegisterDto, registerSchema } from '@/schema/auth.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
@@ -47,6 +49,18 @@ export default function SignupPage() {
   return (
     <div className="flex min-h-dvh items-center justify-center bg-gray-50 px-4 py-12 sm:px-6 lg:px-8 dark:bg-gray-950">
       <div className="w-full max-w-md space-y-8">
+        <div className="flex justify-center">
+          <Link prefetch={false} href={ROUTES.HOME} className="flex items-center gap-2">
+            <Image
+              src="/images/Logo.png"
+              alt="QuickHire"
+              width={200}
+              height={100}
+              className="h-9 w-[152px] min-w-[152px]"
+            />
+            <h3 className="sr-only text-xl font-bold">QuichHire</h3>
+          </Link>
+        </div>
         <div>
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-50">
             Create an account
