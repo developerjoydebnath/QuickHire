@@ -1,5 +1,6 @@
 import { logout } from '@/server-actions/logout';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import { create } from 'zustand';
 
 interface User {
@@ -52,6 +53,8 @@ export const useAuthStore = create<AuthState>((set) => ({
     try {
       await logout();
     } finally {
+      Cookies.remove('jwt');
+      Cookies.remove('jwt', { path: '/' }); // Try with explicit path just in case
       set({
         user: null,
         isAuthenticated: false,
