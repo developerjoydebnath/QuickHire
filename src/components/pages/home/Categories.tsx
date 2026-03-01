@@ -57,7 +57,7 @@ export function Categories() {
                   id: category._id,
                   name: category.name,
                   slug: category.slug, // To pass to Search filter later
-                  count: category.jobCount || 0, // Fallback if backend doesn't aggregate job counts yet
+                  count: category.count || 0, // Fallback if backend doesn't aggregate job counts yet
                   icon: category.icon_name || 'Briefcase',
                 }}
               />
