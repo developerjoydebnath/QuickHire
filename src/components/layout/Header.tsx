@@ -61,6 +61,12 @@ export default function Header() {
               <Button size="lg" variant="outline" onClick={handleLogout}>
                 Logout
               </Button>
+              <Separator orientation="vertical" className="h-[50px]!" />
+              <Button size="lg" asChild>
+                <Link prefetch={false} href={user.role === 'user' ? ROUTES.PROFILE : ROUTES.DASHBOARD}>
+                  {user.role === 'user' ? 'Profile' : 'Dashboard'}
+                </Link>
+              </Button>
             </>
           ) : (
             <>
@@ -90,7 +96,12 @@ export default function Header() {
             <SheetContent side="top" className="p-4">
               <SheetHeader className="mb-8 pl-0">
                 <SheetTitle className="w-fit text-left">
-                  <Link prefetch={false} href={ROUTES.HOME} className="flex items-center gap-2" onClick={() => setIsOpen(false)}>
+                  <Link
+                    prefetch={false}
+                    href={ROUTES.HOME}
+                    className="flex items-center gap-2"
+                    onClick={() => setIsOpen(false)}
+                  >
                     <Image
                       src="/images/Logo.png"
                       alt="QuickHire"
@@ -129,6 +140,11 @@ export default function Header() {
                         }}
                       >
                         Logout
+                      </Button>
+                      <Button size="lg" asChild>
+                        <Link prefetch={false} href={user.role === 'user' ? ROUTES.PROFILE : ROUTES.DASHBOARD}>
+                          {user.role === 'user' ? 'Profile' : 'Dashboard'}
+                        </Link>
                       </Button>
                     </>
                   ) : (
