@@ -1,4 +1,5 @@
-import { axiosInstance } from '@/lib/axios';
+import { logout } from '@/server-actions/logout';
+import axios from 'axios';
 import { create } from 'zustand';
 
 interface User {
@@ -32,7 +33,7 @@ export const useAuthStore = create<AuthState>((set) => ({
   fetchUser: async () => {
     try {
       set({ isLoading: true });
-      const res = await axiosInstance.get('/auth/me');
+      const res = await axios.get(`${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/me`);
       set({
         user: res.data,
         isAuthenticated: true,
@@ -49,7 +50,7 @@ export const useAuthStore = create<AuthState>((set) => ({
 
   logout: async () => {
     try {
-      await axiosInstance.post('/auth/logout');
+      await logout();
     } finally {
       set({
         user: null,

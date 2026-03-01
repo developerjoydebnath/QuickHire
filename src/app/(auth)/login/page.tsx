@@ -3,10 +3,10 @@
 import InputField from '@/components/form/InputField';
 import { Button } from '@/components/ui/button';
 import { loginFormFields } from '@/constants/authFormFIelds';
-import { axiosInstance } from '@/lib/axios';
 import { LoginDto, loginSchema } from '@/schema/auth.schema';
 import { useAuthStore } from '@/store/authStore';
 import { zodResolver } from '@hookform/resolvers/zod';
+import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
@@ -30,7 +30,7 @@ export default function LoginPage() {
 
   const onSubmit = async (data: LoginDto) => {
     try {
-      const res = await axiosInstance.post('/auth/login', data);
+      const res = await axios.post('/api/login', data);
 
       if (res.status === 200) {
         setUser(res.data);
