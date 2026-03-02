@@ -44,6 +44,10 @@ This is the user-facing web application for QuickHire, built to help users brows
 - `npm run start` - Runs the production server after building.
 - `npm run lint` - Runs ESLint to find code issues.
 
+## Live Link
+
+**Frontend**: [https://quick-hire-qtech-solution.vercel.app/](https://quick-hire-qtech-solution.vercel.app/)
+
 ## Demo Credentials
 
 - **Admin Email**: `admin@example.com`

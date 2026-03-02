@@ -29,7 +29,7 @@ export function Hero() {
   };
 
   return (
-    <section id="hero" className="relative h-[calc(100vh-80px)]">
+    <section id="hero" className="relative py-12 md:h-[calc(100vh-80px)] md:py-0">
       {/* pattern image  */}
       <Image
         src="/images/Pattern.png"
