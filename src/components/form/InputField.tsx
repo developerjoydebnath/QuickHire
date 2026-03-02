@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils';
 import { Control, useController, UseControllerProps } from 'react-hook-form';
 import { match } from 'ts-pattern';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
+import { Textarea } from '../ui/textarea';
 import PasswordInput from './PasswordInput';
 import RichTextEditor from './RichTextEditor';
 
@@ -24,12 +25,13 @@ export interface InputFieldProps extends UseControllerProps {
   helperText?: string;
   control?: Control<any>;
   futureDaysDisabled?: boolean;
+  fieldClassName?: string;
 }
 
 export default function InputField({ ...props }: InputFieldProps) {
   const { field, fieldState } = useController(props);
   return (
-    <div className="flex flex-col gap-2">
+    <div className={cn('flex flex-col gap-2', props.fieldClassName)}>
       {props.label && (
         <Label
           htmlFor={field.name}
@@ -116,14 +118,14 @@ export default function InputField({ ...props }: InputFieldProps) {
 
         // textarea
         .with('textarea', () => (
-          <textarea
+          <Textarea
             id={field.name}
             {...field}
             rows={4}
             placeholder={props.placeholder}
             readOnly={props.readOnly}
             className={cn(
-              'border-input bg-background placeholder:text-muted-foreground w-full rounded-md border px-3 py-2 text-sm focus-visible:ring-2 focus-visible:ring-offset-0 focus-visible:outline-none',
+              '',
               fieldState.error &&
                 'border-destructive focus-visible:ring-destructive/20 focus-visible:border-destructive',
               props.inputClassName

@@ -113,8 +113,8 @@ export default function JobDetailPage({ params }: { params: Promise<{ id: string
                     <span>{job.location ? `${job.location.state}, ${job.location.country}` : 'Remote'}</span>
                   </div>
                   <span className="h-1.5 w-1.5 rounded-full bg-slate-300" />
-                  <span className="rounded-full border border-green-200 bg-green-100 px-3 py-1 text-xs font-bold tracking-widest text-green-700 uppercase">
-                    {job.job_type?.name || 'Full Time'}
+                  <span className="rounded-full border border-green-200 bg-green-100 px-3 py-1.5 text-xs font-bold tracking-widest text-green-700 uppercase">
+                    {job.job_type?.name}
                   </span>
                 </div>
               </div>
@@ -133,7 +133,7 @@ export default function JobDetailPage({ params }: { params: Promise<{ id: string
               <h3 className="mb-4 border-b border-slate-100 pb-2 text-xl font-bold text-slate-900">Description</h3>
               {/* Render rich text content */}
               <div
-                className="prose prose-slate prose-p:mb-4 prose-p:mt-0 prose-ul:list-disc prose-ul:ml-5 prose-ol:list-decimal prose-ol:ml-5 prose-li:mb-1 prose-h1:text-2xl prose-h1:font-bold prose-h1:mb-4 prose-h2:text-xl prose-h2:font-bold prose-h2:mb-3 prose-h3:text-lg prose-h3:font-bold prose-h3:mb-2 max-w-none leading-relaxed"
+                className="prose prose-slate prose-p:mb-4 prose-p:mt-0 prose-ul:list-disc prose-ul:ml-5 prose-ol:list-decimal prose-ol:ml-5 prose-li:mb-1 prose-h1:text-2xl prose-h1:font-bold prose-h1:mb-4 prose-h2:text-xl prose-h2:font-bold prose-h2:mb-3 prose-h3:text-lg prose-h3:font-bold prose-h3:mb-2 max-w-none leading-loose"
                 dangerouslySetInnerHTML={{ __html: job.description }}
               />
             </section>
@@ -141,12 +141,12 @@ export default function JobDetailPage({ params }: { params: Promise<{ id: string
 
           {/* Sidebar Overview */}
           <div className="lg:col-span-1">
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+            <div className="rounded-lg border border-slate-200 bg-slate-50 p-6">
               <h3 className="mb-6 text-lg font-bold text-slate-900">About this role</h3>
 
               <div className="space-y-4">
                 {job.salary_range && (
-                  <div className="flex items-start gap-4 rounded-lg p-3 transition-colors hover:bg-white">
+                  <div className="flex items-start gap-4 rounded-md p-3 transition-colors hover:bg-white">
                     <DollarSign className="text-primary mt-0.5 h-6 w-6" />
                     <div>
                       <p className="mb-0.5 text-sm font-medium text-slate-500">Salary</p>
@@ -155,7 +155,7 @@ export default function JobDetailPage({ params }: { params: Promise<{ id: string
                   </div>
                 )}
 
-                <div className="flex items-start gap-4 rounded-lg p-3 transition-colors hover:bg-white">
+                <div className="flex items-start gap-4 rounded-md p-3 transition-colors hover:bg-white">
                   <Briefcase className="text-primary mt-0.5 h-6 w-6" />
                   <div>
                     <p className="mb-0.5 text-sm font-medium text-slate-500">Job Type</p>
@@ -163,7 +163,7 @@ export default function JobDetailPage({ params }: { params: Promise<{ id: string
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4 rounded-lg p-3 transition-colors hover:bg-white">
+                <div className="flex items-start gap-4 rounded-md p-3 transition-colors hover:bg-white">
                   <Calendar className="text-primary mt-0.5 h-6 w-6" />
                   <div>
                     <p className="mb-0.5 text-sm font-medium text-slate-500">Date Posted</p>
@@ -177,7 +177,7 @@ export default function JobDetailPage({ params }: { params: Promise<{ id: string
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4 rounded-lg p-3 transition-colors hover:bg-white">
+                <div className="flex items-start gap-4 rounded-md p-3 transition-colors hover:bg-white">
                   <Calendar className="text-primary mt-0.5 h-6 w-6" />
                   <div>
                     <p className="mb-0.5 text-sm font-medium text-slate-500">Deadline</p>

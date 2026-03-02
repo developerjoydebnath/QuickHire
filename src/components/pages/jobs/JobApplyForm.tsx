@@ -24,7 +24,10 @@ import { useAuthStore } from '@/store/authStore';
 const applySchema = z.object({
   name: z.string().min(1, 'Full name is required'),
   email: z.string().email('Invalid email address'),
-  resume_link: z.string().url('Must be a valid URL'),
+  resume_link: z
+    .string()
+    .url('Must be a valid URL')
+    .regex(/^https?:\/\//i, 'URL must start with http:// or https://'),
   cover_note: z.string().optional(),
   expected_salary: z.coerce.number().optional(),
   notice_period: z.coerce.number().optional(),
@@ -65,12 +68,14 @@ const applyFormFields = [
     label: 'Resume URL *',
     placeholder: 'https://linkedin.com/in/... or Google Drive link',
     type: 'url',
+    fieldClassName: 'col-span-2',
   },
   {
     name: 'cover_note',
     label: 'Cover Note',
     placeholder: 'Why are you a good fit for this position?',
     type: 'textarea',
+    fieldClassName: 'col-span-2',
   },
   {
     name: 'expected_salary',
@@ -166,12 +171,15 @@ export function JobApplyForm({ jobId, jobTitle, companyName, isLoading }: JobApp
               Apply for the <span className="font-semibold text-slate-800">{jobTitle}</span> role at {companyName}.
             </DialogDescription>
           </DialogHeader>
-          <form onSubmit={handleSubmit(onSubmit)} className="grid gap-6 py-4">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="grid max-h-[70vh] grid-cols-2 gap-6 overflow-y-auto p-2 py-4"
+          >
             {applyFormFields.map((field) => (
               <InputField key={field.name} {...field} control={control} />
             ))}
 
-            <Button className="w-full" type="submit" disabled={isSubmitting}>
+            <Button className="col-span-2 w-full" type="submit" disabled={isSubmitting}>
               {isSubmitting ? 'Submitting...' : 'Submit Application'}
             </Button>
           </form>
