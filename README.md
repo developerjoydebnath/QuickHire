@@ -15,6 +15,23 @@ This is the user-facing web application for QuickHire, built to help users brows
 - Node.js (v18 or higher recommended)
 - The QuickHire Backend server running locally (or available remotely)
 
+## Features
+
+### 🏢 Frontend (User Facing)
+
+- **Job Browsing**: Explore a wide range of job listings with advanced filtering and search capabilities.
+- **Job Application**: Apply to jobs directly with a user-friendly modal that handles resume uploads and cover notes.
+- **Public Profiles**: View company information and detailed job descriptions.
+- **Responsive Design**: fully optimized for desktop, tablet, and mobile devices using Tailwind CSS.
+
+### ⚙️ Admin Panel
+
+- **Dashboard Overview**: Get high-level metrics and insights on job postings and applications.
+- **Job Management**: Create, edit, publish, and delete job postings seamlessly.
+- **Application Tracking**: Review candidate applications, update statuses (e.g., pending, accepted, rejected), and manage the hiring pipeline.
+- **User Management**: Manage system users and their roles/permissions.
+- **Category, Company & Location Management**: Organize jobs by categories, manage company records and locations.
+
 ## Local Development Setup
 
 1. **Install Dependencies**
